@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class AnagramChecker {
+
+    public static boolean areAnagrams(String str1, String str2) {
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+
+        int[] charCount1 = new int[26]; // Assuming only lowercase letters
+        int[] charCount2 = new int[26];
+
+        for (char c : str1.toCharArray()) {
+            charCount1[c - 'a']++; // Assuming lowercase letters
+        }
+
+        for (char c : str2.toCharArray()) {
+            charCount2[c - 'a']++; // Assuming lowercase letters
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (charCount1[i] != charCount2[i]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the first string: ");
+        String str1 = scanner.nextLine().toLowerCase();
+
+        System.out.print("Enter the second string: ");
+        String str2 = scanner.nextLine().toLowerCase();
+
+        if (areAnagrams(str1, str2)) {
+            System.out.println(str1 + " and " + str2 + " are anagrams.");
+        } else {
+            System.out.println(str1 + " and " + str2 + " are not anagrams.");
+        }
+
+        scanner.close();
+    }
+}
