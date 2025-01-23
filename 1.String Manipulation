@@ -1,0 +1,28 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class CharacterFrequency {
+
+    public static void main(String[] args) {
+        String input = "Hello World! Welcome to Java Programming.";
+
+        countCharacterFrequency(input);
+    }
+
+    public static void countCharacterFrequency(String input) {
+        Map<Character, Integer> frequencyMap = new HashMap<>();
+        input = input.toLowerCase();
+        for (int i = 0; i < input.length(); i++) {
+            char ch = input.charAt(i);
+
+            if (Character.isLetter(ch)) {
+                frequencyMap.put(ch, frequencyMap.getOrDefault(ch, 0) + 1);
+            }
+        }
+
+        System.out.println("Character frequencies (ignoring case and special characters):");
+        for (Map.Entry<Character, Integer> entry : frequencyMap.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
