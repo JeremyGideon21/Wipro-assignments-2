@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+public class ArrayRotation {
+
+    public static void rotateArray(int arr, int d, String direction) {
+        int n = arr.length;
+
+        if (d < 0 || d >= n) {
+            System.out.println("Invalid rotation count.");
+            return;
+        }
+
+        if (direction.equalsIgnoreCase("left")) {
+            d = d % n; 
+            int temp = new int[d];
+            for (int i = 0; i < d; i++) {
+                temp[i] = arr[i];
+            }
+            for (int i = d; i < n; i++) {
+                arr[i - d] = arr[i];
+            }
+            for (int i = n - d; i < n; i++) {
+                arr[i] = temp[i - (n - d)];
+            }
+        }
+        else if (direction.equalsIgnoreCase("right")) {
+            d = d % n;
+            int temp = new int[d];
+            for (int i = n - d; i < n; i++) {
+                temp[i - (n - d)] = arr[i];
+            }
+            for (int i = n - 1; i >= d; i--) {
+                arr[i] = arr[i - d];
+            }
+            for (int i = 0; i < d; i++) {
+                arr[i] = temp[i];
+            }
+        } else {
+            System.out.println("Invalid rotation direction.");
+        }
+    }
+
+    public static void main(String args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the size of the array: ");
+        int n = scanner.nextInt();
+
+        int arr = new int[n];
+        System.out.print("Enter the array elements: ");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+        System.out.print("Enter the rotation count: ");
+        int d = scanner.nextInt();
+
+        System.out.print("Enter rotation direction (left/right): ");
+        String direction = scanner.next();
+
+        rotateArray(arr, d, direction);
+
+        System.out.print("Rotated array: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+
+        scanner.close();
+    }
+}
